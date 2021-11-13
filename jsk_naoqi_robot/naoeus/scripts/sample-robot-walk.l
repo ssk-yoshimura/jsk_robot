@@ -4,6 +4,8 @@
 (send *robot* :fix-leg-to-coords (make-coords))
 (objects (list *robot*))
 
+(setq angle-list nil)
+
 (let ((footstep-list
        (list (make-coords :coords (send *robot* :rleg :end-coords :copy-worldcoords) :name :rleg)
 	     (make-coords :coords (send (send *robot* :lleg :end-coords :copy-worldcoords)
@@ -17,10 +19,12 @@
 	     (make-coords :coords (send (send *robot* :lleg :end-coords :copy-worldcoords)
 					:translate #f(400 0 0)) :name :lleg))))
   (objects (append (list *robot*) footstep-list))
-  (send *robot* :calc-walk-pattern-from-footstep-list
-	footstep-list
-	:default-step-height 50
-	:default-step-time 1.0
-	:dt 1.0
-	:debug-view t)
+  (setq angle-list
+	(send *robot* :calc-walk-pattern-from-footstep-list
+	      footstep-list
+	      :default-step-height 50
+	      :default-step-time 1.0
+	      :dt 1.0
+	      :calc-zmp t
+	      :debug-view t))
   )
