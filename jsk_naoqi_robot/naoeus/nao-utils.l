@@ -1,5 +1,6 @@
 (require "package://naoeus/nao.l")
 
+
 (defmethod NaoH25V50-robot
   (:interlocking-joint-pairs
    ()
